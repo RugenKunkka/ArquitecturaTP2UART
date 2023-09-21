@@ -1,0 +1,22 @@
+# Archivos y directorios generados por Vivado
+/.Xil/
+/_xmsgs/
+/TP1-ALU.cache/
+/TP1-ALU.hw/
+/TP1-ALU.runs/
+/TP1-ALU.gen/
+/TP1-ALU.ip_user_files/
+/TP1-ALU.sim/
+*.log
+*.jou
+*.str
+
+# Configuraciones locales
+*.ini
+*.xclbin
+
+# Archivos de respaldo generados por editores de texto
+*~
+
+# Archivos de registro de compilación
+compile.log
