@@ -1,12 +1,12 @@
 # Archivos y directorios generados por Vivado
 /.Xil/
 /_xmsgs/
-/TP1-ALU.cache/
-/TP1-ALU.hw/
-/TP1-ALU.runs/
-/TP1-ALU.gen/
-/TP1-ALU.ip_user_files/
-/TP1-ALU.sim/
+/TP2-UART.cache/
+/TP2-UART.hw/
+/TP2-UART.runs/
+/TP2-UART.gen/
+/TP2-UART.ip_user_files/
+/TP2-UART.sim/
 *.log
 *.jou
 *.str
