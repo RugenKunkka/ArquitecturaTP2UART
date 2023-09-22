@@ -20,12 +20,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 `define BAUD_RATE                9600            // Baud rate a generar.             
 `define CLOCK_FREQUENCY_MHZ      100.0           // Frecuencia del clock en MHZ.
+`define DELAY_TIME 120
 
 module TestBench_BaudRateGenerator();
 
     // Parametros
     parameter BAUD_RATE = `BAUD_RATE;
     parameter CLOCK_FREQUENCY_MHZ = `CLOCK_FREQUENCY_MHZ;
+    parameter DELAY_TIME=`DELAY_TIME;
 	
 	//Todo puerto de salida del modulo es un cable.
 	//Todo puerto de estimulo o generacion de entrada es un registro.
@@ -53,11 +55,14 @@ module TestBench_BaudRateGenerator();
 		i_clock = 1'b0;
 		i_reset = 1'b1; // Reset en 0. (Normal cerrado el boton del reset).
 		
-		#120 i_reset = 1'b0; // Desactivo la accion del reset.
+		#DELAY_TIME i_reset = 1'b0; // Desactivo la accion del reset.
 		
 		// Test 1: Prueba reset.
 		#10000 i_reset = 1'b1; // Reset.
-		#120 i_reset = 1'b0; // Desactivo el reset.
+		#DELAY_TIME i_reset = 1'b0; // Desactivo el reset.
+		
+		
+		
 		
 		
 		#5000000 $finish;
