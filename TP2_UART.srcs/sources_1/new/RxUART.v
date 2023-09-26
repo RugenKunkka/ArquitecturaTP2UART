@@ -12,6 +12,17 @@ module RxUART(
         output wire o_rxDone,
         output wire o_fail
     );
+    //Interface!!
+    /*
+    i_rxData
+    i_clock
+    i_tick
+    i_reset
+     
+    o_data
+    o_rxDone
+    o_fail
+    */
     
     parameter DATA_LENGTH = `DATA_LENGTH;
     
