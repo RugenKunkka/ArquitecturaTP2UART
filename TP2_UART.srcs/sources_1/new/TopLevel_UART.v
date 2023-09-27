@@ -58,13 +58,25 @@ module TopLevel_UART(
     wire [8-1:0] o_interfaceData;
     wire o_txStart;
     wire o_doneTick;
+    
+    wire [8-1:0]o_reg_dataA;
+    wire [8-1:0]o_reg_dataB;
+    wire [6-1:0]o_reg_operationCode;
+    
+    wire [8-1:0]o_reg_aluResult;
+    
     InterfaceCircuit#()
     u_InterfaceCircuit(
         .i_data(o_rxData),
         .i_rxDone(o_rxDone),
         .i_reset(i_reset),
-        
         .i_txDone(o_doneTick),
+        .i_tick(o_tick),
+        
+        .o_dataA(o_reg_dataA),
+        .o_dataB(o_reg_dataB),
+        .o_operationCode(o_reg_operationCode),
+        .i_dataAluResult(o_reg_aluResult),
         .o_data(o_interfaceData),
         .o_txStart(o_txStart)
     );
@@ -79,6 +91,17 @@ module TopLevel_UART(
         .o_doneTick(o_doneTick),
         .o_txData(o_txUartData)
     );
+    
+    ALU#()
+    u_ALU(
+        .i_A(o_reg_dataA),
+        .i_B(o_reg_dataB),
+        .i_ALUBitsControl(o_reg_operationCode),
+        
+        .o_ALUResult(o_reg_aluResult)
+    );
+    
+    
     
     
 /*assign o_LEDS[0]=o_interfaceData[0];

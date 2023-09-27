@@ -3,8 +3,8 @@
 module ALU
     // Parameters 
     #(
-        parameter   p_dataLength = 4,//32
-                    p_operatorsInputSize = 4 
+        parameter   p_dataLength = 8,//32
+                    p_operatorsInputSize = 6 
     )
     // Ports
     (
@@ -17,6 +17,14 @@ module ALU
         output wire signed [p_dataLength-1:0] o_ALUResult
         //output wire o_Zero
     );
+    //interfaz
+    /*
+    i_A,
+    i_B,
+    i_ALUBitsControl,
+    
+    o_ALUResult
+    */
 
 reg signed [p_dataLength-1:0]o_reg_ALUResult;
 // Continuous Assignments
@@ -25,14 +33,14 @@ reg signed [p_dataLength-1:0]o_reg_ALUResult;
 // Procedural Blocks
   always @(i_A or i_B or i_ALUBitsControl) begin
     case (i_ALUBitsControl)
-      4'b0001: o_reg_ALUResult = i_A + i_B;   // ADD suma  
-      4'b0010: o_reg_ALUResult = i_A - i_B;   // SUB resta
-      4'b0011: o_reg_ALUResult = i_A & i_B;   // AND 
-      4'b0101: o_reg_ALUResult = i_A | i_B;   // OR
-      4'b0111: o_reg_ALUResult = i_A ^ i_B;   // XOR
-      4'b1000: o_reg_ALUResult = (i_A >>> i_B);   // SRA (Shift Right Arithmetic)
-      4'b1100: o_reg_ALUResult = (i_A >> i_B);    // SRL (Shift Right Logical)
-      4'b1110: o_reg_ALUResult = ~(i_A | i_B);   // NOR
+      6'b100000: o_reg_ALUResult = i_A + i_B;   // ADD suma  
+      6'b100010: o_reg_ALUResult = i_A - i_B;   // SUB resta
+      6'b100100: o_reg_ALUResult = i_A & i_B;   // AND 
+      6'b100101: o_reg_ALUResult = i_A | i_B;   // OR
+      6'b100110: o_reg_ALUResult = i_A ^ i_B;   // XOR
+      6'b000011: o_reg_ALUResult = (i_A >>> i_B);   // SRA (Shift Right Arithmetic)
+      6'b000010: o_reg_ALUResult = (i_A >> i_B);    // SRL (Shift Right Logical)
+      6'b100111: o_reg_ALUResult = ~(i_A | i_B);   // NOR
       default: o_reg_ALUResult = {p_dataLength{1'b0}};//JAMAS OLVIDARES EL DEFAULT!!!!! si uno se lo olvida, el sintetizador hace cualquier cosa.. crea compuertas flipflops etc.. No queremos un comportamiento an?malo
     endcase
   end
