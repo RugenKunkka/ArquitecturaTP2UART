@@ -38,7 +38,6 @@ module TxUART(
     localparam [1:0] READ_DATA_STATE = 2'b10;
     localparam [1:0] STOP_STATE      = 2'b11;
     
-    reg [DATA_LENGTH-1:0]i_reg_data;
     
     reg [1:0] reg_actualState;
     reg [4-1:0] reg_ticksCounter;
@@ -58,17 +57,16 @@ module TxUART(
             o_reg_doneTick<=0;
         end
         else begin
-            o_reg_doneTick<=1'b0;
+            o_reg_doneTick<=0;
             if(reg_actualState == IDLE_STATE)begin
-                o_reg_txData=1;
+                o_reg_txData<=1;
                 if(i_txStart)begin
                     reg_actualState<= START_STATE;
                 end
             end
             else if(reg_actualState==START_STATE) begin
                 o_reg_txData<=0;
-                if(reg_ticksCounter==15) begin 
-                    i_reg_data<=i_data;
+                if(reg_ticksCounter==15) begin
                     reg_actualState<= READ_DATA_STATE;
                     //reg_transmitedBitsCounter<=0;
                 end 
@@ -86,14 +84,17 @@ module TxUART(
                     end
                 end
                 else begin
-                    reg_ticksCounter<=reg_ticksCounter+1; 
+                    o_reg_txData<=o_reg_txData;
+                    reg_ticksCounter<=reg_ticksCounter+1;
                 end  
             end
             else if(reg_actualState==STOP_STATE)begin 
-                o_reg_txData<=1'b1;
+                o_reg_txData<=1;
                 if(reg_ticksCounter==15) begin
                      reg_actualState<= IDLE_STATE;
-                     o_reg_doneTick<=1'b1;
+                     o_reg_doneTick<=1;
+                     reg_ticksCounter<=0;
+                     reg_bitsTxCounter<=0;
                 end
                 else begin
                     reg_ticksCounter<=reg_ticksCounter+1;

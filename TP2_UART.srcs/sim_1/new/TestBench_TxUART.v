@@ -54,6 +54,7 @@ module TestBench_TxUART(
     integer i;
     initial begin
         #2500
+        i_txStart=0;
 		i_clock = 1'b0;
 		i_tick = 1;
 		i_reset = 1'b1; // Reset en 0. (Normal cerrado el boton del reset).
@@ -64,6 +65,23 @@ module TestBench_TxUART(
 		// Test 1: Prueba reset.
 		#10000 i_reset = 1'b1; // Reset.
 		i_tick = 0;
+		#DELAY_TIME i_reset = 1'b0; // Desactivo el reset.
+		i_data=8'b10100011;
+		i_txStart=1;
+		i_tick=1;
+		#DELAY_TIME
+		i_txStart=0;
+		i_tick=0;
+		 for (i = 0; i < 200; i = i + 1) begin
+            #DELAY_TIME i_tick=1;
+            #DELAY_TIME i_tick=0;
+        end
+        #8000
+        i_tick = 0;
+        i_txStart=0;
+        #1000
+        i_tick = 0;
+        #1000
 		#DELAY_TIME i_reset = 1'b0; // Desactivo el reset.
 		i_data=8'b10100011;
 		i_txStart=1;

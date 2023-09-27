@@ -13,6 +13,11 @@
 #set_property LOC SLICE_X36Y50 [get_cells u_muxModulos1/validTX_reg]
 ##### BORRAR CUALQUIER COSA
 
+# Configure I/O Bank 0 for 1.8V operation
+set_property CONFIG_VOLTAGE 3.3 [current_design];
+# Configure I/O Bank 0 for 3.3V/2.5V operation
+set_property CFGBVS VCCO [current_design];
+
 
 ## Clock signal
 
@@ -43,10 +48,10 @@ create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} -add [get_
 
 ##LEDs
 
-#set_property -dict {PACKAGE_PIN H5 IOSTANDARD LVCMOS33} [get_ports {o_leds[0]}]
-#set_property -dict {PACKAGE_PIN J5 IOSTANDARD LVCMOS33} [get_ports {o_leds[1]}]
-#set_property -dict {PACKAGE_PIN T9 IOSTANDARD LVCMOS33} [get_ports {o_leds[2]}]
-#set_property -dict {PACKAGE_PIN T10 IOSTANDARD LVCMOS33} [get_ports {o_leds[3]}]
+set_property -dict {PACKAGE_PIN H5 IOSTANDARD LVCMOS33} [get_ports {o_LEDS[0]}]
+set_property -dict {PACKAGE_PIN J5 IOSTANDARD LVCMOS33} [get_ports {o_LEDS[1]}]
+set_property -dict {PACKAGE_PIN T9 IOSTANDARD LVCMOS33} [get_ports {o_LEDS[2]}]
+set_property -dict {PACKAGE_PIN T10 IOSTANDARD LVCMOS33} [get_ports {o_LEDS[3]}]
 
 ##Buttons
 
@@ -100,8 +105,9 @@ set_property -dict { PACKAGE_PIN B8    IOSTANDARD LVCMOS33 } [get_ports { i_rese
 #set_property -dict { PACKAGE_PIN G2    IOSTANDARD LVCMOS33 } [get_ports { jd[7] }]; #IO_L15N_T2_DQS_35 Sch=jd[10]
 
 ##USB-UART Interface
-
+#es el rx del usb
 set_property -dict {PACKAGE_PIN D10 IOSTANDARD LVCMOS33} [get_ports {o_txUartData}];
+#es el tx del usb
 set_property -dict {PACKAGE_PIN A9 IOSTANDARD LVCMOS33} [get_ports {i_rxUartData}];
 
 ##ChipKit Single Ended Analog Inputs

@@ -61,14 +61,14 @@ module RxUART(
                if(i_rxData==0) begin
                     reg_actualState<=START_STATE;
                     reg_ticksCounter<=0;
-                    o_reg_data<=0;
+                    //o_reg_data<=0;
                     o_reg_fail<=0;
                end
                else begin
                     reg_actualState<=IDLE_STATE;
                     reg_ticksCounter<=0;
                     o_reg_rxDone<=0;
-                    o_reg_data<=0;
+                    //o_reg_data<=0;
                     o_reg_fail<=0;
                end
                 

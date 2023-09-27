@@ -27,13 +27,13 @@ module InterfaceCircuit(
         input wire i_reset,
         
         input wire i_txDone,
-        output wire o_data,
+        output wire [`DATA_LENGTH-1:0] o_data,
         output wire o_txStart
     );
     
     localparam DATA_LENGTH = `DATA_LENGTH;
-    /*
     //interface!!! 
+    /*
     i_data
     i_rxDone
     i_reset
@@ -52,17 +52,15 @@ module InterfaceCircuit(
         end
         else begin
             if(i_rxDone) begin 
-                o_reg_data=i_data;
                 o_reg_txStart=1;
             end
             else begin
-                 o_reg_data=8'b0;
                  o_reg_txStart=0;
             end
        end
     end
     
-assign o_data=o_reg_data;
+assign o_data=i_data;
 assign o_txStart=o_reg_txStart;
 
     

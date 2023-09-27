@@ -24,7 +24,8 @@ module TopLevel_UART(
         input wire i_clock,
         input wire i_rxUartData,
         input wire i_reset,
-        output wire o_txUartData  
+        output wire o_txUartData,
+        output wire [4-1 : 0]o_LEDS
     );
     
     wire o_tick;
@@ -40,7 +41,7 @@ module TopLevel_UART(
     wire [8-1:0] o_rxData;
     wire o_rxDone;
     wire o_fail;
-    
+    //OK probado enviando varios datos por separado
     RxUART#()
     u_RxUART(
         .i_rxData(i_rxUartData),
@@ -53,7 +54,8 @@ module TopLevel_UART(
         .o_fail(o_fail)
     );
     
-    wire o_interfaceData;
+    
+    wire [8-1:0] o_interfaceData;
     wire o_txStart;
     wire o_doneTick;
     InterfaceCircuit#()
@@ -79,7 +81,15 @@ module TopLevel_UART(
     );
     
     
-    
+/*assign o_LEDS[0]=o_interfaceData[0];
+assign o_LEDS[1]=o_interfaceData[1];
+assign o_LEDS[2]=o_interfaceData[2];
+assign o_LEDS[3]=o_interfaceData[3];*/
+
+assign o_LEDS[0]=o_rxDone;
+assign o_LEDS[1]=0;
+assign o_LEDS[2]=o_doneTick;
+assign o_LEDS[3]=0;
     
     
 endmodule
