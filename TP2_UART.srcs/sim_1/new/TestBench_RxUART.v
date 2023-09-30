@@ -50,7 +50,6 @@ module TestBench_RxUART(
     
     wire [DATA_LENGTH-1:0]o_data;
     wire o_rxDone;
-    wire o_fail;
     reg o_tick;
     RxUART#()
     u_RxUART(
@@ -60,8 +59,7 @@ module TestBench_RxUART(
         .i_reset(i_reset),
         
         .o_data(o_data),
-        .o_rxDone(o_rxDone),
-        .o_fail(o_fail)
+        .o_rxDone(o_rxDone)
     );
     
     integer i;

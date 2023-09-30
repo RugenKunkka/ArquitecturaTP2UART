@@ -28,6 +28,15 @@ module TopLevel_UART(
         output wire [4-1 : 0]o_LEDS
     );
     
+    //interface
+    /*
+    i_clock,
+    i_rxUartData,
+    i_reset,
+    o_txUartData,
+    o_LEDS
+    */
+    
     wire o_tick;
     
     BaudRateGenerator#() 
@@ -50,11 +59,10 @@ module TopLevel_UART(
         .i_reset(i_reset),
          
         .o_data(o_rxData),
-        .o_rxDone(o_rxDone),
-        .o_fail(o_fail)
+        .o_rxDone(o_rxDone)
     );
     
-    
+  
     wire [8-1:0] o_interfaceData;
     wire o_txStart;
     wire o_doneTick;
@@ -67,6 +75,7 @@ module TopLevel_UART(
     
     InterfaceCircuit#()
     u_InterfaceCircuit(
+        .i_clock(i_clock),
         .i_data(o_rxData),
         .i_rxDone(o_rxDone),
         .i_reset(i_reset),
@@ -104,15 +113,22 @@ module TopLevel_UART(
     
     
     
-/*assign o_LEDS[0]=o_interfaceData[0];
-assign o_LEDS[1]=o_interfaceData[1];
-assign o_LEDS[2]=o_interfaceData[2];
-assign o_LEDS[3]=o_interfaceData[3];*/
+    
+assign o_LEDS[0]=o_reg_dataA[0];
+assign o_LEDS[1]=o_reg_dataA[1];
+assign o_LEDS[2]=o_reg_dataA[2];
+assign o_LEDS[3]=o_reg_dataA[3];
+    
+/*assign o_LEDS[0]=o_reg_aluResult[0];
+assign o_LEDS[1]=o_reg_aluResult[1];
+assign o_LEDS[2]=o_reg_aluResult[2];
+assign o_LEDS[3]=o_reg_aluResult[3];*/
 
-assign o_LEDS[0]=o_rxDone;
+
+/*assign o_LEDS[0]=o_rxDone;
 assign o_LEDS[1]=0;
 assign o_LEDS[2]=o_doneTick;
 assign o_LEDS[3]=0;
-    
+    */
     
 endmodule
