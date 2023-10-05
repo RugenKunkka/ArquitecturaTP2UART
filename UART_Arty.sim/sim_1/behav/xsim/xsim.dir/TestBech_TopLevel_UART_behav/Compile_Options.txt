@@ -1,0 +1,1 @@
+--incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "unisims_ver" -L "unimacro_ver" -L "secureip" --snapshot "TestBech_TopLevel_UART_behav" "xil_defaultlib.TestBech_TopLevel_UART" "xil_defaultlib.glbl" -log "elaborate.log" 

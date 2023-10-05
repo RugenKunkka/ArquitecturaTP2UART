@@ -1,0 +1,15 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../UART_Arty.srcs/sources_1/new/ALU.v" \
+"../../../../UART_Arty.srcs/sources_1/new/BaudRateGenerator.v" \
+"../../../../UART_Arty.srcs/sources_1/new/InterfaceCircuit.v" \
+"../../../../UART_Arty.srcs/sources_1/new/RxUART.v" \
+"../../../../UART_Arty.srcs/sources_1/new/TopLevel_UART.v" \
+"../../../../UART_Arty.srcs/sources_1/new/TxUART.v" \
+"../../../../UART_Arty.srcs/sim_1/new/TestBech_TopLevel_UART.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
